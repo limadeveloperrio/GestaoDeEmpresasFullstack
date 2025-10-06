@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-litle">Consulta de empresa</h5>
+        <p class="card-text">Listagem de empresas cadastradas</p>
+        <hr />
+
+        @if (mensagem_sucesso) {
+        <div class="alert alert-success">
+            Sucesso: <strong>{{ mensagem_sucesso }}</strong>
+        </div>
+        }
+
+        @if (mensagem_erro) {
+        <div class="alert alert-danger">
+            erro: <strong>{{ mensagem_erro }}</strong>
+        </div>
+        }
+
+
+        <div class="mb-3 col-md-4">
+            <label>Filtro de busca:</label>
+            <input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Digite aqui">
+        </div>
+
+        <table class="table table-hover table-striped table-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome fantasia</th>
+                    <th>Razão Social</th>
+                    <th>CNPJ</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let e of empresasFiltradas | paginate: { id: 'empresasPag', itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                    <td>{{ e.nomeFantasia | uppercase }}</td>
+                    <td>{{ e.razaoSocial }}</td>
+                    <td>{{ e.cnpj }}</td>
+                    <td>
+                        <button class="btn btn-primary" [routerLink]="['/edicao-empresa', e.id]">Editar</button>
+                        &nbsp;
+                        <button class="btn btn-danger bt-sm" (click)="excluir(e.id)">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Quantidade de empresas: {{empresas.length}}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-center">
+            <pagination-controls id="empresasPag" (pageChange)="handlePageChange($event)"
+                previousLabel="Página anterior" nextLabel="Próxima página">
+            </pagination-controls>
+        </div>
+
+
+    </div>
+</div>

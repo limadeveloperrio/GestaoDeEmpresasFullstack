@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Edição de empresa</h5>
+        <p>Utilize os campos abaixo para alterar os dados da empres</p>
+        <hr />
+        <div *ngIf="mensagem_sucesso" class="alert alert-success">
+            Sucesso: <strong>{{ mensagem_sucesso }}</strong>
+        </div>
+
+        <div *ngIf="mensagem_erro" class="alert alert-success">
+            Sucesso: <strong>{{ mensagem_erro }}</strong>
+        </div>
+        <form *ngIf="formEdicao" [formGroup]="formEdicao" (ngSubmit)="onSubmit()">
+
+            <input type="hidden" formControlName="id">
+            <div class="row">
+                <div class="col-md-5">
+                    <label>Nome fantasia da empresa:</label>
+                    <input type="text" class="form-control" formControlName="nomeFantasia">
+                    @if (nomeFantasia?.touched && nomeFantasia?.errors) {
+                    <div class="text-danger">
+                        @if (nomeFantasia?.errors?.['required']) { Nome fantasia é obrigatório. }
+                        @if (nomeFantasia?.errors?.['minlength']) { Mínimo de 3 caracteres. }
+                        @if (nomeFantasia?.errors?.['maxlength']) { Máximo de 50 caracteres. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-2">
+                    <label>Razão Social</label>
+                    <input type="text" class="form-control" formControlName="razaoSocial" readonly>
+                    @if (razaoSocial?.touched && razaoSocial?.errors) {
+                    <div class="text-danger">
+                        @if (razaoSocial?.errors?.['required']) { Razão social é obrigatória. }
+                        @if (razaoSocial?.errors?.['minlength']) { Mínimo de 3 caracteres. }
+                        @if (razaoSocial?.errors?.['maxlength']) { Máximo de 100 caracteres. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-2">
+                    <label>CNPJ</label>
+                    <input type="text" class="form-control" formControlName="cnpj">
+                    @if (cnpj?.touched && cnpj?.errors) {
+                    <div class="text-danger">
+                        @if (cnpj?.errors?.['required']) { CNPJ é obrigatório. }
+                        @if (cnpj?.errors?.['minlength']) { Deve ter 14 caracteres. }
+                        @if (cnpj?.errors?.['maxlength']) { Deve ter 14 caracteres. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Salvar alteraçoes" class="btn btn-success"
+                        [disabled]="!formEdicao.valid">
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

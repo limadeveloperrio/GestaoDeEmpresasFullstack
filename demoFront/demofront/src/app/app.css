@@ -1,0 +1,13 @@
+.bg-verde-escuro {
+  background-color: #064635 !important; /* verde escuro */
+}
+
+.input-verde {
+  background-color: #ffffff !important; /* fundo branco */
+  color: #064635 !important;            /* texto verde escuro */
+}
+
+.input-verde::placeholder {
+  color: #064635 !important;  /* placeholder verde escuro */
+  opacity: 1;                 /* garante que não fique "apagado" */
+}

@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Cadastro de empresa</h5>
+    <p class="card-text">Preencha os campos abaixo para o cadastro</p>
+    <hr />
+
+    @if (mensagem_sucesso) {
+    <div class="alert alert-success">
+      Sucesso: <strong>{{ mensagem_sucesso }}</strong>
+    </div>
+    }
+
+    @if (mensagem_erro) {
+    <div class="alert alert-danger">
+      erro: <strong>{{ mensagem_erro }}</strong>
+    </div>
+    }
+
+    <form [formGroup]="formcadastro" (ngSubmit)="onSubmit()">
+      <div class="row g-3 align-items-end">
+
+        <!-- Nome Fantasia -->
+        <div class="col-md-4">
+          <label>Nome fantasia da empresa:</label>
+          <input type="text" class="form-control" formControlName="nomeFantasia" />
+
+          @if (nomeFantasia?.touched && nomeFantasia?.errors) {
+          <div class="text-danger">
+            @if (nomeFantasia?.errors?.['required']) { Nome fantasia é obrigatório. }
+            @if (nomeFantasia?.errors?.['minlength']) { Mínimo de 3 caracteres. }
+            @if (nomeFantasia?.errors?.['maxlength']) { Máximo de 50 caracteres. }
+          </div>
+          }
+        </div>
+
+        <!-- Razão Social -->
+        <div class="col-md-3">
+          <label>Razão Social:</label>
+          <input type="text" class="form-control" formControlName="razaoSocial" />
+
+          @if (razaoSocial?.touched && razaoSocial?.errors) {
+          <div class="text-danger">
+            @if (razaoSocial?.errors?.['required']) { Razão social é obrigatória. }
+            @if (razaoSocial?.errors?.['minlength']) { Mínimo de 3 caracteres. }
+            @if (razaoSocial?.errors?.['maxlength']) { Máximo de 100 caracteres. }
+          </div>
+          }
+        </div>
+
+        <!-- CNPJ -->
+        <div class="col-md-3">
+          <label>CNPJ:</label>
+          <input type="text" class="form-control" formControlName="cnpj" />
+
+          @if (cnpj?.touched && cnpj?.errors) {
+          <div class="text-danger">
+            @if (cnpj?.errors?.['required']) { CNPJ é obrigatório. }
+            @if (cnpj?.errors?.['minlength']) { Deve ter 14 caracteres. }
+            @if (cnpj?.errors?.['maxlength']) { Deve ter 14 caracteres. }
+          </div>
+          }
+        </div>
+
+        <!-- Botões -->
+        <div class="col-md-2 d-flex flex-column align-items-center">
+          <button type="submit" class="btn btn-success w-100 mb-2" [disabled]="!formcadastro.valid">
+            Cadastrar empresa
+          </button>
+
+          <button type="button" class="btn btn-secondary w-100" (click)="limparCampos()">
+            Limpar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
