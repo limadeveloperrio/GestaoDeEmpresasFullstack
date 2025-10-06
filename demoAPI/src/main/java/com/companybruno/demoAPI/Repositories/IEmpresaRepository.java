@@ -1,6 +1,6 @@
 package com.companybruno.demoAPI.Repositories;
 
-import com.companybruno.demoAPI.entities.Empresa;
+import com.companybruno.demoAPI.models.entities.Empresa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

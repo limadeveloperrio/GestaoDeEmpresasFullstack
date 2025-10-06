@@ -1,4 +1,4 @@
-package com.companybruno.demoAPI.entities;
+package com.companybruno.demoAPI.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

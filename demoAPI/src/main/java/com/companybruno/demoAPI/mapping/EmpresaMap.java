@@ -1,6 +1,6 @@
 package com.companybruno.demoAPI.mapping;
 
-import com.companybruno.demoAPI.entities.Empresa;
+import com.companybruno.demoAPI.models.entities.Empresa;
 import com.companybruno.demoAPI.models.requests.EmpresaDTO;
 
 public class EmpresaMap {

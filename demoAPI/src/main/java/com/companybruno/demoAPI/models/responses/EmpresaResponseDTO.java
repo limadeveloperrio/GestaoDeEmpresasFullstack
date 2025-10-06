@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmpresaResponse {
+public class EmpresaResponseDTO {
     private Integer statusCode;
     private String mensagem;
     private EmpresaDTO empresaRequest;

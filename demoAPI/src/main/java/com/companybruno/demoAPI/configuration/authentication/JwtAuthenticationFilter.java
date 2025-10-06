@@ -1,4 +1,4 @@
-package com.companybruno.demoAPI.configuration;
+package com.companybruno.demoAPI.configuration.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

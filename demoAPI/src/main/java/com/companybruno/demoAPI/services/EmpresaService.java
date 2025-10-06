@@ -1,31 +1,29 @@
 package com.companybruno.demoAPI.services;
 
 import com.companybruno.demoAPI.Repositories.IEmpresaRepository;
-import com.companybruno.demoAPI.entities.Empresa;
-import com.companybruno.demoAPI.interfaces.IEmpresaServies;
+import com.companybruno.demoAPI.models.entities.Empresa;
+import com.companybruno.demoAPI.interfaces.IEmpresaServices;
 import com.companybruno.demoAPI.mapping.EmpresaMap;
 import com.companybruno.demoAPI.models.requests.EmpresaDTO;
-import com.companybruno.demoAPI.models.responses.EmpresaResponse;
+import com.companybruno.demoAPI.models.responses.EmpresaResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmpresaService implements IEmpresaServies {
+public class EmpresaService implements IEmpresaServices {
 
     @Autowired
     IEmpresaRepository empresaRepository;
 
     @Override
-    public ResponseEntity<EmpresaResponse> postServices(EmpresaDTO request) {
-        EmpresaResponse response = new EmpresaResponse();
+    public ResponseEntity<EmpresaResponseDTO> postServices(EmpresaDTO request) {
+        EmpresaResponseDTO response = new EmpresaResponseDTO();
         response.setEmpresaRequest(request);
         try {
             if(empresaRepository.findByRazaoSocial(request.getRazaoSocial())!=null){
@@ -49,8 +47,8 @@ public class EmpresaService implements IEmpresaServies {
         }
     }
 
-    public ResponseEntity<EmpresaResponse> putServices(@RequestBody EmpresaDTO request){
-        EmpresaResponse response = new EmpresaResponse();
+    public ResponseEntity<EmpresaResponseDTO> putServices(@RequestBody EmpresaDTO request){
+        EmpresaResponseDTO response = new EmpresaResponseDTO();
 
         try {
             Optional<Empresa> result = empresaRepository.findById(request.getId());
@@ -86,8 +84,8 @@ public class EmpresaService implements IEmpresaServies {
     }
 
     
-    public ResponseEntity<EmpresaResponse> getById(Integer id){
-    	EmpresaResponse response = new EmpresaResponse();
+    public ResponseEntity<EmpresaResponseDTO> getById(Integer id){
+    	EmpresaResponseDTO response = new EmpresaResponseDTO();
     	
     	try {
 			Optional<Empresa> result = empresaRepository.findById(id);
@@ -114,9 +112,9 @@ public class EmpresaService implements IEmpresaServies {
     	
     }
     
-    public ResponseEntity<EmpresaResponse> detetebyId(Integer id){
+    public ResponseEntity<EmpresaResponseDTO> detetebyId(Integer id){
 
-        EmpresaResponse response = new EmpresaResponse();
+        EmpresaResponseDTO response = new EmpresaResponseDTO();
 
     	try {
 			Optional<Empresa> empresa = empresaRepository.findById(id);

@@ -5,7 +5,7 @@ import com.companybruno.demoAPI.models.responses.EmpresaResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface IEmpresaServies {
+public interface IEmpresaServices {
     public ResponseEntity<EmpresaResponseDTO> postServices(@RequestBody EmpresaDTO request);
     public ResponseEntity<EmpresaResponseDTO> putServices(@RequestBody EmpresaDTO request);
 

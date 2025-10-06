@@ -1,7 +1,7 @@
 package com.companybruno.demoAPI.controllers;
 
 import com.companybruno.demoAPI.models.requests.EmpresaDTO;
-import com.companybruno.demoAPI.models.responses.EmpresaResponse;
+import com.companybruno.demoAPI.models.responses.EmpresaResponseDTO;
 import com.companybruno.demoAPI.services.EmpresaService;
 
 import java.util.List;
@@ -25,12 +25,12 @@ public class EmpresaController {
     EmpresaService empresaService;
 
     @PostMapping(ENDPOINT)
-    public ResponseEntity<EmpresaResponse> post(@RequestBody EmpresaDTO request){
+    public ResponseEntity<EmpresaResponseDTO> post(@RequestBody EmpresaDTO request){
        return empresaService.postServices(request);
     }
 
     @PutMapping(ENDPOINT)
-    public  ResponseEntity<EmpresaResponse> put(@RequestBody EmpresaDTO request){
+    public  ResponseEntity<EmpresaResponseDTO> put(@RequestBody EmpresaDTO request){
         return empresaService.putServices(request);
     }    
     
@@ -40,12 +40,12 @@ public class EmpresaController {
 	}
     
     @GetMapping(ENDPOINT + "/{id}")
-    public ResponseEntity<EmpresaResponse> getById(@PathVariable("id")Integer id){    	
+    public ResponseEntity<EmpresaResponseDTO> getById(@PathVariable("id")Integer id){
     	return empresaService.getById(id);
     }
 
     @DeleteMapping(ENDPOINT + "/{id}")
-    public ResponseEntity<EmpresaResponse> deleteById(@PathVariable("id")Integer id){
+    public ResponseEntity<EmpresaResponseDTO> deleteById(@PathVariable("id")Integer id){
     	return empresaService.detetebyId(id);
     }
 }

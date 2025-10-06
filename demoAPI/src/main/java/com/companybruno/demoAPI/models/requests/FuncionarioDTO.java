@@ -9,7 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FuncionarioRequest {
+public class FuncionarioDTO {
+    private Integer id;
     private String nome;
     private String cpf;
     private String matricula;
