@@ -26,13 +26,30 @@ export const routes: Routes = [
       .then(m => m.ConsultaEmpresas)
   },
   {
-    path: 'edicao-empresa/:id',
+    path: 'edicao-empresa/:idEmpresa',
     canActivate: [authGuard],
     loadComponent: () => import('./edicao-empresas/edicao-empresas')
       .then(m => m.EdicaoEmpresas)
   },
   {
-    path: '', 
+    path: 'cadastro-funcionarios',
+    canActivate: [authGuard],
+    loadComponent: () => import('./cadastro-funcionarios/cadastro-funcionarios')
+      .then(m => m.CadastroFuncionarios)
+  },
+  {
+    path: 'consulta-funcionarios',
+    canActivate: [authGuard],
+    loadComponent: () => import('./consulta-funcionarios/consulta-funcionarios')
+      .then(m => m.ConsultaFuncionarios)
+  }, {
+    path: 'edicao-funcionarios',
+    canActivate: [authGuard],
+    loadComponent: () => import('./edicao-funcionarios/edicao-funcionarios')
+      .then(m => m.EdicaoFuncionarios)
+  },
+  {
+    path: '',
     redirectTo: '/inicio',
     pathMatch: 'full'
   }

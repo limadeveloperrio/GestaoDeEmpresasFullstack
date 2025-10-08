@@ -10,7 +10,7 @@
     <div class="alert alert-danger" *ngIf="mensagem"> <strong>{{ mensagem }}</strong></div>
     <div class="d-flex justify-content-center vh-100">
         <form class="col-md-4" [formGroup]="formLogin" (ngSubmit)="onSubmit()">
-            <label>Eamil de acesso:</label>
+            <label>Email de acesso:</label>
             <input type="email" class="form-control" placeholder="Digite aqui" formControlName="email" />
             @if (email?.touched && email?.errors) {
             <div class="text-danger">

@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Cadastro de funcionários</h5>
+        <p class="card-text">Preencha os campos abaixo para incluir um funcionário</p>
+        <hr />
+
+        <div *ngIf="mensagem_sucesso" class="alert alert-success">
+            Sucesso: <strong>{{mensagem_sucesso}}</strong>r
+        </div>
+        <div *ngIf="mensagem_erro" class="alert alert-success">
+            Erro: <strong>{{mensagem_erro}}</strong>r
+        </div>
+        <form [formGroup]='formFuncionario' (ngSubmit)='onSubmit()'>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="">Nome do funcionário:</label>
+                    <input type="text" class="form-control" formControlName='nome'>
+
+                    @if (nome?.touched && nome?.errors) {
+                    <div class="text-danger">
+                        @if (nome?.errors?.['required']) { Nome é obrigatório. }
+                        @if (nome?.errors?.['minlength']) { Mínimo de 5 caracteres. }
+                        @if (nome?.errors?.['maxlength']) { Máximo de 150 caracteres. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="">CPF:</label>
+                    <input type="text" class="form-control" mask="000.000.000-00" formControlName='cpf'>
+
+                    @if (cpf?.touched && cpf?.errors) {
+                    <div class="text-danger">
+                        @if (nome?.errors?.['required']) { CPF é obrigatório. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="">Data de admissão:</label>
+                    <input type="date" class="form-control" formControlName='dataAdmissao'>
+                    @if (dataAdmissao?.touched && dataAdmissao?.errors) {
+                    <div class="text-danger">
+                        @if (dataAdmissao?.errors?.['required']) { data de admissão é obrigatório. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="">Matrícula:</label>
+                    <input type="text" class="form-control" mask="000/000" formControlName='matricula'>
+                                        @if (matricula?.touched && matricula?.errors) {
+                    <div class="text-danger">
+                        @if (matricula?.errors?.['required']) { Matrícula é obrigatório. }
+                    </div>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <label for="">Selecione uma empresa:</label>
+                    <select name="" id="" class="form-select" formControlName="idEmpresa">
+                        <option value=""> Escolha uma opção</option>
+                        <option *ngFor="let e of empresas" value="{{ e.idEmpresa}}">
+                          {{ e.idEmpresa}}  {{ e.nomeFantasia | uppercase}} (CNPJ: {{e.cnpj | mask: '00.000.000/0000-00'}})
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-center ">
+                    <input type="submit" value="Cadastrar funcionário" class="btn btn-success">
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

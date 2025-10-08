@@ -35,7 +35,7 @@ public class EmpresaService implements IEmpresaServices {
                 response.setStatusCode(400);
                 response.setMensagem("O CNPJ " + request.getCnpj() + " já está  cadastrada, tente outra");
                 return  new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-            }            
+            }
             empresaRepository.save(EmpresaMap.map(request));
             response.setStatusCode(201);
             response.setMensagem("Empresa cadastrada com sucesso.");
@@ -51,7 +51,7 @@ public class EmpresaService implements IEmpresaServices {
         EmpresaResponseDTO response = new EmpresaResponseDTO();
 
         try {
-            Optional<Empresa> result = empresaRepository.findById(request.getId());
+            Optional<Empresa> result = empresaRepository.findById(request.getIdEmpresa());
             if (result.isPresent()) {
                 empresaRepository.save(EmpresaMap.map(request));
                 response.setStatusCode(200);
@@ -59,7 +59,7 @@ public class EmpresaService implements IEmpresaServices {
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 response.setStatusCode(400);
-                response.setMensagem("Empresa de ID " + request.getId() + " Ainda não cadastrada.");
+                response.setMensagem("Empresa de ID " + request.getIdEmpresa() + " Ainda não cadastrada.");
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
         }catch (Exception e){
@@ -68,12 +68,12 @@ public class EmpresaService implements IEmpresaServices {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    
+
     public ResponseEntity<List<EmpresaDTO>> getAll() {
         try {
             List<EmpresaDTO> responses = empresaRepository.findAll()
                     .stream()
-                    .map(EmpresaMap::mapToResponse) 
+                    .map(EmpresaMap::mapToResponse)
                     .toList();
 
             return ResponseEntity.ok(responses);
@@ -83,41 +83,47 @@ public class EmpresaService implements IEmpresaServices {
         }
     }
 
-    
+
     public ResponseEntity<EmpresaResponseDTO> getById(Integer id){
     	EmpresaResponseDTO response = new EmpresaResponseDTO();
-    	
+
     	try {
 			Optional<Empresa> result = empresaRepository.findById(id);
-			
+
 			if(result.isPresent()) {
 				Empresa empresa = result.get();
 				EmpresaDTO dto = EmpresaMap.mapToResponse(empresa);
 				response.setStatusCode(200);
 				response.setMensagem("Empresa por ID");
 				response.setEmpresaRequest(dto);
-				
+
 				return ResponseEntity.ok(response);
 			}else {
 				response.setStatusCode(200);
 				response.setMensagem("Empresa não existe.");
-				
+
 				return ResponseEntity.ok(response);
 			}
-			
+
 		} catch (Exception e) {
 			response.setMensagem(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
-    	
+
     }
-    
-    public ResponseEntity<EmpresaResponseDTO> detetebyId(Integer id){
+
+    public ResponseEntity<EmpresaResponseDTO> DeleteServices(Integer id){
 
         EmpresaResponseDTO response = new EmpresaResponseDTO();
 
     	try {
 			Optional<Empresa> empresa = empresaRepository.findById(id);
+            Integer qtdFuncionarios = empresaRepository.countFuncionarioId(id);
+            if (qtdFuncionarios > 0) {
+                response.setStatusCode(400);
+                response.setMensagem("Não é possível realizar a exclusão pois a empresa possui funcionários.");
+                return ResponseEntity.badRequest().body(response);
+            }
     	if(empresa.isPresent()) {
     		empresaRepository.delete(empresa.get());
             response.setMensagem("Empresa removida com sucesso.");
@@ -125,8 +131,8 @@ public class EmpresaService implements IEmpresaServices {
     	}else{
             response.setMensagem("Ocorreu um erro ou empresa não existe.");
     		return ResponseEntity.ok( response);
-    	}    	
-    
+    	}
+
 		} catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}

@@ -12,7 +12,7 @@ public class EmpresaMap {
 	public static Empresa map(EmpresaDTO request) {
 		Empresa empresa = new Empresa();
 		
-		empresa.setIdEmpresa(request.getId());
+		empresa.setIdEmpresa(request.getIdEmpresa());
 		empresa.setCnpj(request.getCnpj());
 		empresa.setRazaoSocial(request.getRazaoSocial());
 		empresa.setNomeFantasia(request.getNomeFantasia());
@@ -23,7 +23,7 @@ public class EmpresaMap {
 	public static EmpresaDTO mapToResponse(Empresa empresa) {		
 		EmpresaDTO dto = new EmpresaDTO();	
 		
-		dto.setId(empresa.getIdEmpresa());
+		dto.setIdEmpresa(empresa.getIdEmpresa());
 		dto.setCnpj(empresa.getCnpj());
 		dto.setNomeFantasia(empresa.getNomeFantasia());
 		dto.setRazaoSocial(empresa.getRazaoSocial());

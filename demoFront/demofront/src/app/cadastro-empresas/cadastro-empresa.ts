@@ -3,13 +3,18 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmpresasService } from '../services/empresasService';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-cadastro-empresas',
   standalone: true,
   templateUrl: './cadastro-empresa.html',
   styleUrls: ['./cadastro-empresa.css'],
-  imports: [CommonModule, ReactiveFormsModule]   // <- IMPORTANTE
+  imports: [CommonModule, 
+    ReactiveFormsModule,
+    NgxMaskDirective, 
+    ],
+    providers: [provideNgxMask()] 
 })
 export class CadastroEmpresas {
   formcadastro: FormGroup;

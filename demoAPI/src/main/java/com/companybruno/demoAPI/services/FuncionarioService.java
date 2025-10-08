@@ -27,14 +27,14 @@ public class FuncionarioService implements IFuncionarioServices {
     @Override
     public ResponseEntity<FuncionarioResponseDTO> funcionarioPostServices(FuncionarioDTO request) {
 
-        FuncionarioResponseDTO  responseDTO = new FuncionarioResponseDTO();
+        FuncionarioResponseDTO responseDTO = new FuncionarioResponseDTO();
         try {
-            if(funcionarioRepository.findByCPF(request.getCpf()) != null){
+            if (funcionarioRepository.findByCPF(request.getCpf()) != null) {
                 responseDTO.setStatusCode(400);
                 responseDTO.setMensagem("O CPF " + request.getCpf() + " já está cadastrado");
                 return ResponseEntity.badRequest().body(responseDTO);
             }
-            if(funcionarioRepository.findByMatricula(request.getMatricula()) != null){
+            if (funcionarioRepository.findByMatricula(request.getMatricula()) != null) {
                 responseDTO.setStatusCode(400);
                 responseDTO.setMensagem("A matrícula  " + request.getMatricula() + " já está cadastrado");
                 return ResponseEntity.badRequest().body(responseDTO);
@@ -53,7 +53,7 @@ public class FuncionarioService implements IFuncionarioServices {
             responseDTO.setMensagem("Funcionario cadastrado com sucesso");
             return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
-            return  ResponseEntity.badRequest().body(responseDTO);
+            return ResponseEntity.badRequest().body(responseDTO);
         }
     }
 

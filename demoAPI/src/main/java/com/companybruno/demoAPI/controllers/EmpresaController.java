@@ -46,6 +46,6 @@ public class EmpresaController {
 
     @DeleteMapping(ENDPOINT + "/{id}")
     public ResponseEntity<EmpresaResponseDTO> deleteById(@PathVariable("id")Integer id){
-    	return empresaService.detetebyId(id);
+    	return empresaService.DeleteServices(id);
     }
 }

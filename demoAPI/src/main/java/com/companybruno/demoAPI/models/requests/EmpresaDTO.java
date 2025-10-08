@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class EmpresaDTO {
-    private Integer id;
+    private Integer idEmpresa;
     private String nomeFantasia;
     private String razaoSocial;
     private String cnpj;

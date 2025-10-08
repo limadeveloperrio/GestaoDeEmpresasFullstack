@@ -50,22 +50,24 @@ export class EdicaoEmpresas implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this.service.getById(+id).subscribe({
+    const idParam = this.activatedRoute.snapshot.paramMap.get('idEmpresa');    
+    const idEmpresa = idParam ? Number(idParam) : null;
+
+    if (idEmpresa && !isNaN(idEmpresa)) {
+      this.service.getById(idEmpresa).subscribe({
         next: (empresa: any) => {
-          const dados = empresa.empresaRequest;
-          this.formEdicao?.patchValue({
-            id: dados.id,
+          const dados = empresa.empresaRequest ?? empresa;
+          this.formEdicao.patchValue({
+            id: dados.idEmpresa ?? dados.id,
             nomeFantasia: dados.nomeFantasia,
             razaoSocial: dados.razaoSocial,
             cnpj: dados.cnpj
           });
         },
-        error: (e) => {
-          console.error('Erro ao carregar empresa:', e);
-        }
+        error: (e) => console.error('Erro ao carregar empresa:', e)
       });
+    } else {
+      console.error('ID da empresa inválido:', idParam);
     }
   }
 

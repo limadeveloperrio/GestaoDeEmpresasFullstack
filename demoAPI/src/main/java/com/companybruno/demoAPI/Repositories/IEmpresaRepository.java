@@ -13,4 +13,7 @@ public interface IEmpresaRepository extends JpaRepository<Empresa, Integer> {
 
     @Query("from Empresa e where e.cnpj = :param")
     Empresa findByCNPJ(@Param(("param")) String cnpj);
+
+    @Query("select count(f) from Funcionario f where f.empresa.idEmpresa = :param")
+    Integer countFuncionarioId(@Param("param") Integer id);
 }
